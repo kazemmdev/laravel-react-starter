@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+    @apply transform;
+    @apply scale-75;
+    @apply -translate-y-6;
+}
+
+input:focus ~ label {
+    @apply text-black;
+    @apply left-0;
+}
