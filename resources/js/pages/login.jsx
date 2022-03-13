@@ -1,19 +1,25 @@
 import { useState } from "react";
 import { login } from "../services/authService";
 import Input from "../components/input";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
+    const navigation = useNavigate();
+
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
+    const [errors, setErrors] = useState([]);
+
     const submitHandle = async (e) => {
         e.preventDefault();
+
         await login({
             email: email,
             password: password,
-        }).then((data) => {
-            console.log(data);
-        });
+        })
+            .then(() => navigation("/"))
+            .catch((error) => setErrors(error.response.data.errors));
     };
 
     return (
@@ -27,6 +33,7 @@ const Login = () => {
                         type="email"
                         value={email}
                         onChange={(v) => setEmail(v.target.value)}
+                        error={errors["email"] ?? null}
                     />
                     <Input
                         label="Password"
@@ -34,6 +41,7 @@ const Login = () => {
                         type="password"
                         value={password}
                         onChange={(v) => setPassword(v.target.value)}
+                        error={errors["password"] ?? null}
                     />
                     <button
                         type="submit"
