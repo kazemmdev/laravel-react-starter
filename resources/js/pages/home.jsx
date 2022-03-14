@@ -1,20 +1,23 @@
-import { Component } from "react";
-import { user } from "../services/authService";
+import { useSelector } from "react-redux";
+import { selectUser } from "../store/userSlice";
 
-class Home extends Component {
-    render() {
-        return (
-            <div className="w-full min-h-screen pt-10">
-                <div className="max-w-md m-auto p-5 bg-white border rounded">
-                    <ul>
-                        <li>error handing in forum</li>
-                        <li>redux user data handling</li>
-                        <li>docker integration</li>
-                    </ul>
-                </div>
+const Home = () => {
+    const { payload: user } = useSelector(selectUser);
+
+    return (
+        <div className="w-full min-h-screen pt-10">
+            <div className="max-w-md m-auto p-5 bg-white border rounded">
+                <h2 className="text-2xl font-bold">Welcome {user.name} </h2>
+                <p className="text-gray-600">
+                    This is a Laravel and React starter kit powered by redux and
+                    tailwindcss
+                </p>
+                <ul>
+                    <li>docker integration</li>
+                </ul>
             </div>
-        );
-    }
-}
+        </div>
+    );
+};
 
 export default Home;

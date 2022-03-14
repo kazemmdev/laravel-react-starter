@@ -1,8 +1,8 @@
 import axios from "axios";
+import constants from "./constants";
 
-const baseUrl = "http://127.0.0.1:8000";
+axios.defaults.baseURL = constants.HOST_URL;
 
-axios.defaults.baseURL = baseUrl + "/api/";
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Accespt"] = "application/json";
 axios.defaults.headers.post["Content-Type"] = "application/json";

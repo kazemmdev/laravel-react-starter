@@ -22,9 +22,8 @@ class AuthController extends Controller
 
     public function login(LoginRequest $request) {
 
-        if (!$token = auth()->attempt($request->validated()))
+        if (!$token = auth()->attempt($request->validated())) 
             return response()->json(['message' => 'Invalid email or password'], 401);
-
 
         return response()->json([
             'user' => auth()->user(),

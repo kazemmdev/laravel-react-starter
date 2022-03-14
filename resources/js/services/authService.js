@@ -1,13 +1,31 @@
+import store from "../store";
 import http from "./httpService";
-
-export async function login(data) {
-    return await http.post("login", data);
-}
+import { login as loginAction } from "../store/userSlice";
 
 export async function register(data) {
-    return await http.post("register", data);
+    return await http.post("register", data).then(() => user());
 }
 
-export async function user() {
-    return await http.get("user");
+export async function login(data) {
+    return await http.post("login", data).then(({ data }) => {
+        console.log(data);
+        dispatchUser(data?.user);
+    });
+}
+
+export async function fetchUser() {
+    return await http.get("user").then(({ data }) => {
+        dispatchUser(data.data);
+    });
+}
+
+function dispatchUser(user) {
+    if (user) {
+        store.dispatch(
+            loginAction({
+                name: user.name,
+                email: user.email,
+            })
+        );
+    }
 }
