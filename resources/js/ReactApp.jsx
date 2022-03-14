@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import Spinner from "./components/spinner";
 import AppRoutes from "./ReactRoutes";
@@ -7,13 +7,18 @@ import { selectUser } from "./store/userSlice";
 
 const ReactApp = () => {
     const user = useSelector(selectUser);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
-        if (!user) fetchUser();
+        if (!user) {
+            setLoading(true);
+            fetchUser().then(() => setLoading(false));
+        }
     }, []);
 
-    if (user) return <AppRoutes />;
-    else return <Spinner />;
+    if (loading) return <Spinner />;
+
+    return <AppRoutes />;
 };
 
 export default ReactApp;
