@@ -450,14 +450,6 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-left: auto;
   margin-right: auto;
 }
-.my-10 {
-  margin-top: 2.5rem;
-  margin-bottom: 2.5rem;
-}
-.my-32 {
-  margin-top: 8rem;
-  margin-bottom: 8rem;
-}
 .my-60 {
   margin-top: 15rem;
   margin-bottom: 15rem;
@@ -477,9 +469,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .block {
   display: block;
 }
-.inline-block {
-  display: inline-block;
-}
 .flex {
   display: flex;
 }
@@ -489,9 +478,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-8 {
   height: 2rem;
 }
-.h-5 {
-  height: 1.25rem;
-}
 .min-h-screen {
   min-height: 100vh;
 }
@@ -500,9 +486,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-8 {
   width: 2rem;
-}
-.w-5 {
-  width: 1.25rem;
 }
 .max-w-4xl {
   max-width: 56rem;
@@ -559,9 +542,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .border {
   border-width: 1px;
-}
-.border-4 {
-  border-width: 4px;
 }
 .border-b-2 {
   border-bottom-width: 2px;
@@ -622,19 +602,19 @@ Ensure the default browser behavior of the `hidden` attribute.
   font-size: 0.875rem;
   line-height: 1.25rem;
 }
-.text-xl {
-  font-size: 1.25rem;
-  line-height: 1.75rem;
-}
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
 }
-.font-medium {
-  font-weight: 500;
+.text-xl {
+  font-size: 1.25rem;
+  line-height: 1.75rem;
 }
 .font-bold {
   font-weight: 700;
+}
+.font-medium {
+  font-weight: 500;
 }
 .text-gray-500 {
   --tw-text-opacity: 1;

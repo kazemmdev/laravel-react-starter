@@ -1,7 +1,6 @@
 import axios from "axios";
-import constants from "./constants";
 
-axios.defaults.baseURL = constants.HOST_URL;
+axios.defaults.baseURL = process.env.APP_API;
 
 axios.defaults.withCredentials = true;
 axios.defaults.headers.post["Accespt"] = "application/json";
