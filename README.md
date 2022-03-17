@@ -1,9 +1,11 @@
 # Laravel & React Starter
 
-This is a starter laravel8 project that used react, tailwinfcss and redux in front and  postgres as db.
+This is a starter laravel8 project that used [react](https://reactjs.org/), [tailwindcss](https://tailwindcss.com/) and [redux](https://redux.js.org/) in front and [postgres](https://www.postgresql.org/) as db.
 
 ## Usage
-Just clone the repo and create a .env by copying .env.example and Update the required fields. then run 
+ This repo required [docker](https://www.docker.com/) installed on your machine
 
-`./init.sh`
+1. clone the repo
+2. Create a .env by copying .env.example and Update the required fields.
+3. Run `./init.sh`
 
