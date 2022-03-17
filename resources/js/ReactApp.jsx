@@ -12,7 +12,9 @@ const ReactApp = () => {
     useEffect(() => {
         if (!user) {
             setLoading(true);
-            fetchUser().then(() => setLoading(false));
+            fetchUser()
+                .then(() => setLoading(false))
+                .catch(() => setLoading(false));
         }
     }, []);
 

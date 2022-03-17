@@ -1,15 +1,10 @@
-FROM node:alpine
+FROM node:14-alpine
 
+ENV USER=node
+
+# RUN addgroup ${USER} && adduser -S -G  ${USER}  ${USER}
+RUN mkdir -p /app && chown -R  ${USER}:${USER} /app
+USER ${USER}
 WORKDIR /app
 
-RUN addgroup app && adduser -S -G app app && chown -R app /app
-
-USER app
-
-COPY --chown=app:node package*.json ./
-
-RUN npm install
-
-COPY --chown=app:node . .
-
-CMD ["npm", "run", "prod"]
+COPY --chown=${USER}:${USER} . .

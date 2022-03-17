@@ -25,7 +25,7 @@ const Login = () => {
     return (
         <div className="w-full min-h-screen pt-10">
             <div className="max-w-md m-auto p-5 bg-white border rounded">
-                <h2 className="font-medium text-xl">Login</h2>
+                <h2 className="font-medium text-xl">Login Now</h2>
                 <form className="pt-5" onSubmit={submitHandle}>
                     <Input
                         label="Email"

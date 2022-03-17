@@ -3,12 +3,11 @@ import http from "./httpService";
 import { login as loginAction } from "../store/userSlice";
 
 export async function register(data) {
-    return await http.post("register", data).then(() => user());
+    return await http.post("register", data).then(() => login(data));
 }
 
 export async function login(data) {
     return await http.post("login", data).then(({ data }) => {
-        console.log(data);
         dispatchUser(data?.user);
     });
 }

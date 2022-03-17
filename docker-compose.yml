@@ -1,51 +1,71 @@
-version: '3'
-services:
-  php-fpm: 
-    build:
-      context: .
-      dockerfile: php.dockerfile
-    container_name: php-fpm
-    working_dir: /var/www/
-    volumes:
-      - ./:/var/www
-      - ./docker/php-fpm/php.ini:/usr/local/etc/php/conf.d/local.ini
-    networks:
-      - app-network
+# ! Docker-Compose Specification
+version: '3.8'
 
-  nginx:
+# ! Define Project Network
+networks:
+  app-network:
+
+# ! Define Project Volume
+volumes:
+  pgdata:
+
+# ? App Stack
+services:
+  # ? Bring up Nginx After Backend and Link Volumes
+  webserver:
     image: nginx:1.21-alpine
-    container_name: server-nginx
+    container_name: webserver
+    restart: unless-stopped
+    ports:
+      - "${HTTP_PORT}"
     volumes: 
       - ./:/var/www
-      - ./docker/nginx:/etc/nginx/conf.d/
-    ports:
-      - "80:80"
+      - .docker/nginx:/etc/nginx/conf.d
     networks:
       - app-network
 
-  react:
-    build:
-      context: .
-      dockerfile: npm.dockerfile
-    container_name: react
-    networks:
-      - app-network
-
-  postgres:
+  # ? Bring up Postgres and configure the Database
+  database:
     image: postgres:14-alpine
-    container_name: db-postgres
-    volumes:
-      - ./docker/postgresql:/var/lib/postgresql/data
+    container_name: database
+    restart: unless-stopped
+    tty: true
+    ports:
+      - "5432:5432"
     environment:
       - POSTGRES_USER=${DB_USERNAME}
       - POSTGRES_PASSWORD=${DB_PASSWORD}
       - POSTGRES_DB=${DB_DATABASE}
       - PGDATA=/var/lib/postgresql/data
-    ports:
-      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
     networks:
       - app-network
 
-networks:
-  app-network:
-    driver: bridge
+  # ? Build, Bring up Backend Container
+  backend: 
+    build:
+      context: .
+      dockerfile: php.dockerfile
+    container_name: backend
+    volumes:
+      - .:/var/www
+      - .docker/php-fpm/php.ini:/usr/local/etc/php/conf.d/local.ini
+    depends_on:
+      - database
+    networks:
+      - app-network
+
+  # ? Bring Up Client UI
+  client:
+    build:
+      context: .
+      dockerfile: npm.dockerfile
+    container_name: client
+    tty: true
+    volumes:
+      - ./:/app
+    depends_on:
+      - backend
+    networks:
+      - app-network

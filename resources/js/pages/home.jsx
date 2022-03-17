@@ -12,9 +12,6 @@ const Home = () => {
                     This is a Laravel and React starter kit powered by redux and
                     tailwindcss
                 </p>
-                <ul>
-                    <li>docker integration</li>
-                </ul>
             </div>
         </div>
     );
